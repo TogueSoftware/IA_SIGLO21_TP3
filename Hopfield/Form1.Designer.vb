@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(Form1))
         imgEntrada = New PictureBox()
         imgIntermedia = New PictureBox()
         imgSalida = New PictureBox()
@@ -29,18 +30,18 @@ Partial Class Form1
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
-        bArriba = New Button()
-        dDerecha = New Button()
-        bIzquierda = New Button()
-        bAbajo = New Button()
-        Button1 = New Button()
-        Button2 = New Button()
-        Button3 = New Button()
+        btnDetectarPatron = New Button()
+        btnCargarPatron = New Button()
         buscarArchivo = New FolderBrowserDialog()
-        Label4 = New Label()
+        imgPatron = New PictureBox()
+        lblPeso = New Label()
+        lblResultadoPeso = New Label()
+        ProgressBar1 = New ProgressBar()
+        chkmostrar = New CheckBox()
         CType(imgEntrada, ComponentModel.ISupportInitialize).BeginInit()
         CType(imgIntermedia, ComponentModel.ISupportInitialize).BeginInit()
         CType(imgSalida, ComponentModel.ISupportInitialize).BeginInit()
+        CType(imgPatron, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' imgEntrada
@@ -48,33 +49,34 @@ Partial Class Form1
         imgEntrada.Image = My.Resources.Resources.paso1
         imgEntrada.Location = New Point(12, 63)
         imgEntrada.Name = "imgEntrada"
-        imgEntrada.Size = New Size(294, 295)
+        imgEntrada.Size = New Size(281, 295)
+        imgEntrada.SizeMode = PictureBoxSizeMode.Zoom
         imgEntrada.TabIndex = 0
         imgEntrada.TabStop = False
         ' 
         ' imgIntermedia
         ' 
-        imgIntermedia.Image = My.Resources.Resources.paso2
-        imgIntermedia.Location = New Point(343, 63)
+        imgIntermedia.Image = CType(resources.GetObject("imgIntermedia.Image"), Image)
+        imgIntermedia.Location = New Point(314, 63)
         imgIntermedia.Name = "imgIntermedia"
         imgIntermedia.Size = New Size(281, 295)
-        imgIntermedia.SizeMode = PictureBoxSizeMode.StretchImage
+        imgIntermedia.SizeMode = PictureBoxSizeMode.Zoom
         imgIntermedia.TabIndex = 1
         imgIntermedia.TabStop = False
         ' 
         ' imgSalida
         ' 
-        imgSalida.Image = My.Resources.Resources.paso3
-        imgSalida.Location = New Point(661, 63)
+        imgSalida.Image = CType(resources.GetObject("imgSalida.Image"), Image)
+        imgSalida.Location = New Point(614, 63)
         imgSalida.Name = "imgSalida"
         imgSalida.Size = New Size(281, 295)
-        imgSalida.SizeMode = PictureBoxSizeMode.StretchImage
+        imgSalida.SizeMode = PictureBoxSizeMode.Zoom
         imgSalida.TabIndex = 2
         imgSalida.TabStop = False
         ' 
         ' btnCargarImagen
         ' 
-        btnCargarImagen.Location = New Point(181, 364)
+        btnCargarImagen.Location = New Point(168, 364)
         btnCargarImagen.Name = "btnCargarImagen"
         btnCargarImagen.Size = New Size(125, 23)
         btnCargarImagen.TabIndex = 3
@@ -93,7 +95,7 @@ Partial Class Form1
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(343, 45)
+        Label2.Location = New Point(314, 45)
         Label2.Name = "Label2"
         Label2.Size = New Size(103, 15)
         Label2.TabIndex = 5
@@ -102,93 +104,89 @@ Partial Class Form1
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(661, 45)
+        Label3.Location = New Point(614, 45)
         Label3.Name = "Label3"
         Label3.Size = New Size(125, 15)
         Label3.TabIndex = 6
         Label3.Text = "Detección de patrones"
         ' 
-        ' bArriba
+        ' btnDetectarPatron
         ' 
-        bArriba.Location = New Point(59, 360)
-        bArriba.Name = "bArriba"
-        bArriba.Size = New Size(22, 23)
-        bArriba.TabIndex = 7
-        bArriba.UseVisualStyleBackColor = True
+        btnDetectarPatron.Location = New Point(638, 390)
+        btnDetectarPatron.Name = "btnDetectarPatron"
+        btnDetectarPatron.Size = New Size(219, 23)
+        btnDetectarPatron.TabIndex = 12
+        btnDetectarPatron.Text = "Detectar patron (precargado)"
+        btnDetectarPatron.UseVisualStyleBackColor = True
         ' 
-        ' dDerecha
+        ' btnCargarPatron
         ' 
-        dDerecha.Location = New Point(79, 380)
-        dDerecha.Name = "dDerecha"
-        dDerecha.Size = New Size(22, 23)
-        dDerecha.TabIndex = 8
-        dDerecha.UseVisualStyleBackColor = True
+        btnCargarPatron.Location = New Point(12, 399)
+        btnCargarPatron.Name = "btnCargarPatron"
+        btnCargarPatron.Size = New Size(281, 23)
+        btnCargarPatron.TabIndex = 13
+        btnCargarPatron.Text = "Usar imagen como patron de entrenamiento"
+        btnCargarPatron.UseVisualStyleBackColor = True
         ' 
-        ' bIzquierda
+        ' imgPatron
         ' 
-        bIzquierda.Location = New Point(39, 380)
-        bIzquierda.Name = "bIzquierda"
-        bIzquierda.Size = New Size(22, 23)
-        bIzquierda.TabIndex = 9
-        bIzquierda.UseVisualStyleBackColor = True
+        imgPatron.BorderStyle = BorderStyle.Fixed3D
+        imgPatron.Location = New Point(850, 12)
+        imgPatron.Name = "imgPatron"
+        imgPatron.Size = New Size(45, 48)
+        imgPatron.SizeMode = PictureBoxSizeMode.StretchImage
+        imgPatron.TabIndex = 16
+        imgPatron.TabStop = False
         ' 
-        ' bAbajo
+        ' lblPeso
         ' 
-        bAbajo.Location = New Point(59, 400)
-        bAbajo.Name = "bAbajo"
-        bAbajo.Size = New Size(22, 23)
-        bAbajo.TabIndex = 10
-        bAbajo.UseVisualStyleBackColor = True
+        lblPeso.Location = New Point(679, 12)
+        lblPeso.Name = "lblPeso"
+        lblPeso.Size = New Size(165, 20)
+        lblPeso.TabIndex = 17
+        lblPeso.Text = "Peso"
+        lblPeso.TextAlign = ContentAlignment.MiddleLeft
         ' 
-        ' Button1
+        ' lblResultadoPeso
         ' 
-        Button1.Location = New Point(445, 364)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(75, 23)
-        Button1.TabIndex = 11
-        Button1.Text = "Limpieza"
-        Button1.UseVisualStyleBackColor = True
+        lblResultadoPeso.Location = New Point(614, 413)
+        lblResultadoPeso.Name = "lblResultadoPeso"
+        lblResultadoPeso.Size = New Size(318, 54)
+        lblResultadoPeso.TabIndex = 18
+        lblResultadoPeso.Text = "Resultado Peso:"
+        lblResultadoPeso.TextAlign = ContentAlignment.MiddleLeft
         ' 
-        ' Button2
+        ' ProgressBar1
         ' 
-        Button2.Location = New Point(691, 364)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(219, 23)
-        Button2.TabIndex = 12
-        Button2.Text = "Procesar con entrenamiento previo"
-        Button2.UseVisualStyleBackColor = True
+        ProgressBar1.Location = New Point(614, 359)
+        ProgressBar1.Name = "ProgressBar1"
+        ProgressBar1.Size = New Size(281, 10)
+        ProgressBar1.TabIndex = 19
         ' 
-        ' Button3
+        ' chkmostrar
         ' 
-        Button3.Location = New Point(771, 393)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(75, 23)
-        Button3.TabIndex = 13
-        Button3.Text = "Entrenar"
-        Button3.UseVisualStyleBackColor = True
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.Location = New Point(12, 364)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(41, 15)
-        Label4.TabIndex = 14
-        Label4.Text = "Mover"
+        chkmostrar.AutoSize = True
+        chkmostrar.Checked = True
+        chkmostrar.CheckState = CheckState.Checked
+        chkmostrar.Location = New Point(614, 370)
+        chkmostrar.Name = "chkmostrar"
+        chkmostrar.Size = New Size(275, 19)
+        chkmostrar.TabIndex = 20
+        chkmostrar.Text = "Mostrar Imagen en proceso (mucho más lento)"
+        chkmostrar.UseVisualStyleBackColor = True
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(952, 436)
-        Controls.Add(Label4)
-        Controls.Add(Button3)
-        Controls.Add(Button2)
-        Controls.Add(Button1)
-        Controls.Add(bAbajo)
-        Controls.Add(bIzquierda)
-        Controls.Add(dDerecha)
-        Controls.Add(bArriba)
+        ClientSize = New Size(966, 476)
+        Controls.Add(chkmostrar)
+        Controls.Add(ProgressBar1)
+        Controls.Add(lblResultadoPeso)
+        Controls.Add(lblPeso)
+        Controls.Add(imgPatron)
+        Controls.Add(btnCargarPatron)
+        Controls.Add(btnDetectarPatron)
         Controls.Add(Label3)
         Controls.Add(Label2)
         Controls.Add(Label1)
@@ -197,10 +195,12 @@ Partial Class Form1
         Controls.Add(imgIntermedia)
         Controls.Add(imgEntrada)
         Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Siglo 21 - Software de reconocimiento de patrones por IA con red de hopfield"
         CType(imgEntrada, ComponentModel.ISupportInitialize).EndInit()
         CType(imgIntermedia, ComponentModel.ISupportInitialize).EndInit()
         CType(imgSalida, ComponentModel.ISupportInitialize).EndInit()
+        CType(imgPatron, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -212,13 +212,12 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents bArriba As Button
-    Friend WithEvents dDerecha As Button
-    Friend WithEvents bIzquierda As Button
-    Friend WithEvents bAbajo As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnDetectarPatron As Button
+    Friend WithEvents btnCargarPatron As Button
     Friend WithEvents buscarArchivo As FolderBrowserDialog
-    Friend WithEvents Label4 As Label
+    Friend WithEvents imgPatron As PictureBox
+    Friend WithEvents lblPeso As Label
+    Friend WithEvents lblResultadoPeso As Label
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents chkmostrar As CheckBox
 End Class
